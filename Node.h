@@ -14,6 +14,7 @@ struct Node{
     bool is_word{};
     string cadena;
     bool leaf{};
+    Node** children;
 
     Node(){
         is_word = false;
@@ -21,6 +22,11 @@ struct Node{
 
         /*Si leaf es true significa que es nodo hoja. */
         leaf = true;
+
+        children = new Node*[26];
+        for (int i = 0; i < 26; ++i) {
+            children[i] = nullptr;
+        }
     }
 
 };

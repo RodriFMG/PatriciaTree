@@ -9,33 +9,31 @@
 
 class ArrayHash{
 private:
-    Node** hash;
+    Node* node;
 public:
     ArrayHash(){
-        hash = new Node*[26];
-        for (int i = 0; i < 26; ++i) {
-            hash[i] = nullptr;
-        }
+        node = new Node[26];
     }
 
     Node* search(char enlace){
         int ind = enlace - 'a';
-        return hash[ind];
+        return node->children[ind];
     }
 
     void insert(char enlace, Node* elm){
         int ind = enlace - 'a';
-        hash[ind] = elm;
+        node->children[ind] = elm;
     }
 
     bool esta_o_no(char enlace){
         int ind = enlace - 'a';
-        return (hash[ind] == nullptr);
+        return (node->children[ind] == nullptr);
     }
 
     void KillSelf(){
-        for(int i=0; i<26; ++i) delete hash[i];
-        delete[] hash;
+        for(int i=0; i<26; ++i) delete node->children[i];
+        delete[] node->children;
+        delete[] node;
     }
 
 };

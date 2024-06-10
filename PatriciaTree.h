@@ -7,5 +7,17 @@
 
 #include "array.h"
 
+class PatriciaTree{
+private:
+    ArrayHash root;
+public:
+    PatriciaTree() = default;
+
+    void insert(){
+
+    }
+
+};
+
 
 #endif //PATRICIATREE_PATRICIATREE_H

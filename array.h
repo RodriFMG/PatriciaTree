@@ -15,6 +15,10 @@ public:
         node = new Node[26];
     }
 
+    Node* root(){
+        return node;
+    }
+
     Node* search(char enlace){
         int ind = enlace - 'a';
         return node->children[ind];

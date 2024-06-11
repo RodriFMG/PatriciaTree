@@ -45,6 +45,8 @@ struct Node {
     ArrayHash* hash;
     Node** children;
 
+    Node* padre;
+
     Node();
 
     ~Node();
@@ -55,6 +57,7 @@ Node::Node() {
     cadena = "";
     leaf = true;
     children = new Node*[26];
+    padre = nullptr;
     for (int i = 0; i < 26; ++i) {
         children[i] = nullptr;
     }

@@ -64,6 +64,7 @@ void PatriciaTree::insert(string word) {
             new_node->is_word = node->is_word;
             new_node->leaf = node->leaf;
 
+
             for (int j = 0; j < 26; ++j) {
                 if (node->children[j]) {
                     new_node->children[j] = node->children[j];
@@ -73,7 +74,7 @@ void PatriciaTree::insert(string word) {
 
             node->hash->insert(new_node->cadena[0], new_node);
 
-            if (!word.empty())node->is_word = false;
+            if (!word.empty()) node->is_word = false;
             else node->is_word = true;
 
             node->leaf = false;

@@ -31,6 +31,8 @@ public:
 
     bool esta_o_no(char enlace);
 
+    void replace(char enlace);
+
     static int ind(char caracter);
 
     void KillSelf();
@@ -94,6 +96,11 @@ void ArrayHash::KillSelf() {
 
 int ArrayHash::ind(char caracter) {
     return caracter - 'a';
+}
+
+void ArrayHash::replace(char enlace) {
+    int ind = enlace - 'a';
+    node->children[ind] = nullptr;
 }
 
 #endif //PATRICIATREE_NODE_H

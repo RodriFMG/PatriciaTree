@@ -4,18 +4,16 @@
 
 int main() {
 
-    auto* patriciaTree = new PatriciaTree();
-
-    patriciaTree->insert("test");
-    patriciaTree->insert("toaster");
-    patriciaTree->insert("toasted");
-    patriciaTree->insert("tasting");
-    patriciaTree->insert("slow");
-    patriciaTree->insert("slowly");
-    patriciaTree->insert("testimony");
-    patriciaTree->insert("testament");
-    patriciaTree->insert("slowest");
+    PatriciaTree tree;
+    tree.insert("apple");
+    tree.insert("app");
+    tree.insert("apricot");
 
 
-    cout<<boolalpha<<patriciaTree->search("testament");
+
+
+    cout << tree.search("apple") << endl;   // Output: 1 (true)
+    cout << tree.search("app") << endl;     // Output: 1 (true)
+    cout << tree.search("apricot") << endl; // Output: 1 (true)
+    cout << tree.search("aple") << endl;      // Output: 0 (false)
 }

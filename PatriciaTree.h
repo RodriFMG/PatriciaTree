@@ -20,28 +20,39 @@ public:
     void insert(string word);
     bool search(string word);
 
+
+    Node* get(char pe){
+        return root->hash->search(pe);
+    }
 };
 
 
 void PatriciaTree::insert(string word) {
 
-    string str{};
     auto* node = root;
 
+    //cout<<word<<"\n";
+
     while(!word.empty()){
+        string str{};
+
         if(node->hash->esta_o_no(word[0])){
             node = node->hash->search(word[0]);
-            word.erase(0,1); //puede q no vaya.
+
 
             if(word == node->cadena) break;
 
-            for(int i=0; i< node->cadena.size(); ++i){
+
+            int i{};
+            while(!word.empty() && !node->cadena.empty()){
                 if(word[i] == node->cadena[i]) {
                     str += word[i];
+                    word.erase(0, 1);
                     node->cadena.erase(0,1);
-                    word.erase(0,1);
+                    --i;
                 }
                 else break;
+                ++i;
             }
 
             if(node->cadena.empty()){
@@ -49,19 +60,25 @@ void PatriciaTree::insert(string word) {
                 continue;
             }
 
-            auto* new_node = new Node();
+            auto* new_node = new Node[26];
             new_node->is_word = true;
             new_node->leaf = true;
             new_node->cadena = node->cadena;
 
             node->hash->insert(node->cadena[0],new_node);
 
-            node->is_word = false;
+            if(word.empty()) node->is_word = true;
+            else node->is_word = false;
+
             node->leaf = false;
             node->cadena = str;
+
         }
         else{
-            auto* new_node = new Node();
+
+            //cout<<word<<"";
+
+            auto* new_node = new Node[26];
             new_node->cadena = word;
             new_node->leaf = true;
             new_node->is_word = true;
@@ -72,6 +89,8 @@ void PatriciaTree::insert(string word) {
         }
     }
 
+    //cout<<"\n----------\n";
+
 }
 
 bool PatriciaTree::search(std::string word) {
@@ -79,23 +98,27 @@ bool PatriciaTree::search(std::string word) {
     auto* node = root;
 
     while(!word.empty()){
-        if (!node->hash->esta_o_no(word[0])) return false;
+        if(node->hash->esta_o_no(word[0])){
+            node = node->hash->search(word[0]);
 
-        node = node->hash->search(word[0]);
+            if(node->is_word && node->cadena == word) return true;
 
-        if (node->leaf) return (word == node->cadena);
-
-        for (size_t i = 0; i < node->cadena.size() && i < word.size(); ++i) {
-            if (word[i] != node->cadena[i]) {
-                return false;
+            int i{},j{};
+            while(!word.empty() && !node->cadena.empty()){
+                if(word[i] == node->cadena[j]) {
+                    word.erase(0, 1);
+                    --i;
+                }
+                else break;
+                ++i;
+                j++;
             }
+
+
         }
-
-        word.erase(0, node->cadena.size());
-
-        if (node->is_word && node->cadena == word) return true;
-
-
+        else{
+            break;
+        }
     }
 
     return false;

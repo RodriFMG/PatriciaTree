@@ -31,6 +31,8 @@ public:
 
     bool esta_o_no(char enlace);
 
+    static int ind(char caracter);
+
     void KillSelf();
 };
 
@@ -81,7 +83,7 @@ void ArrayHash::insert(char enlace, Node* elm) {
 
 bool ArrayHash::esta_o_no(char enlace) {
     int ind = enlace - 'a';
-    return (node->children[ind] == nullptr);
+    return (node->children[ind] != nullptr);
 }
 
 void ArrayHash::KillSelf() {
@@ -90,5 +92,8 @@ void ArrayHash::KillSelf() {
     delete[] node;
 }
 
+int ArrayHash::ind(char caracter) {
+    return caracter - 'a';
+}
 
 #endif //PATRICIATREE_NODE_H

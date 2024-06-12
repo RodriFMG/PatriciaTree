@@ -19,6 +19,7 @@ struct Node;
 class ArrayHash {
 private:
     Node* node;
+    int n_insert{};
 
 public:
     explicit ArrayHash(Node* node1);
@@ -34,6 +35,10 @@ public:
     void replace(char enlace);
 
     static int ind(char caracter);
+
+    bool solo_un_hijo();
+
+    char encontrar_unico_hijo();
 
     void KillSelf();
 };
@@ -84,6 +89,7 @@ Node* ArrayHash::search(char enlace) {
 void ArrayHash::insert(char enlace, Node* elm) {
     int ind = enlace - 'a';
     node->children[ind] = elm;
+    ++n_insert;
 }
 
 bool ArrayHash::esta_o_no(char enlace) {
@@ -105,5 +111,33 @@ void ArrayHash::replace(char enlace) {
     int ind = enlace - 'a';
     node->children[ind] = nullptr;
 }
+
+bool ArrayHash::solo_un_hijo() {
+    int ind{};
+    for(int i=0; i<26; ++i){
+        if(node->children[i]) ++ind;
+        if(ind==2) {
+            return false;
+        }
+    }
+
+    if(ind==0) { return false; }
+
+    return true;
+}
+
+char ArrayHash::encontrar_unico_hijo() {
+    if(!solo_un_hijo()){
+        cout<<"esta mal pe"<<endl;
+        return 'a';
+    }
+
+    for(int i=0; i < 26; ++i)
+        if(node->children[i]){
+            auto* node_hijo = node->children[i];
+            return node_hijo->cadena[0];
+        }
+}
+
 
 #endif //PATRICIATREE_NODE_H

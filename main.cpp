@@ -3,7 +3,7 @@
 
 /* Falta de revisar el tema de los enlaces y maybe un caso posible más (Funciona para
  * todos los casos excepto uno extremadamente raro ;-;). Apartir de este código
- * lo único que faltaría sería mejorarlo y quitarle complejidad.
+ * lo único que faltaría sería mejorarlo, ponerlo ordenado y quitarle complejidad si se puede.
  * Tambien falta mejorar el tema de las eliminaciones y enlaces. (eso nomas es fijarme en el código
  * y ver los lugares en los cuales me olvido poner nullptr). El search e insert funcionan al 100% (creo xd)
  * solo falta ver más que todo el remove. */

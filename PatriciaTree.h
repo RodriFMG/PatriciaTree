@@ -128,6 +128,7 @@ bool PatriciaTree::search(std::string word) {
 
 }
 
+// Ver el único caso que falla.
 void PatriciaTree::remove(std::string word) {
 
     auto* node = root;

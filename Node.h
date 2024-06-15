@@ -40,6 +40,10 @@ public:
 
     char encontrar_unico_hijo();
 
+    bool encontrar_2_hijos();
+
+    bool encontrar_mas_de_2_hijos();
+
     void KillSelf();
 };
 
@@ -49,8 +53,6 @@ struct Node {
     bool leaf;
     ArrayHash* hash;
     Node** children;
-
-    Node* padre;
 
     Node();
 
@@ -62,7 +64,6 @@ Node::Node() {
     cadena = "";
     leaf = true;
     children = new Node*[26];
-    padre = nullptr;
     for (int i = 0; i < 26; ++i) {
         children[i] = nullptr;
     }
@@ -121,6 +122,8 @@ bool ArrayHash::solo_un_hijo() {
         }
     }
 
+
+
     if(ind==0) { return false; }
 
     return true;
@@ -139,5 +142,26 @@ char ArrayHash::encontrar_unico_hijo() {
         }
 }
 
+bool ArrayHash::encontrar_2_hijos() {
+    int ind{};
+    for(int i=0; i<26; ++i){
+        if(node->children[i]) ++ind;
+        if(ind==2) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool ArrayHash::encontrar_mas_de_2_hijos() {
+    int ind{};
+    for(int i=0; i<26; ++i){
+        if(node->children[i]) ++ind;
+        if(ind>2) {
+            return true;
+        }
+    }
+    return false;
+}
 
 #endif //PATRICIATREE_NODE_H

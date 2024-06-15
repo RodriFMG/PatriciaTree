@@ -1,137 +1,114 @@
 #include "PatriciaTree.h"
 
-
-/* Falta de revisar el tema de los enlaces y maybe un caso posible más (Funciona para
- * todos los casos excepto uno extremadamente raro ;-;). Apartir de este código
- * lo único que faltaría sería mejorarlo y quitarle complejidad.
- * Tambien falta mejorar el tema de las eliminaciones y enlaces. (eso nomas es fijarme en el código
- * y ver los lugares en los cuales me olvido poner nullptr). El search e insert funcionan al 100% (creo xd)
- * solo falta ver más que todo el remove. */
 int main() {
+
     PatriciaTree tree;
 
-    // Inserts
-    tree.insert("zygomatic");
-    tree.insert("zygomaticus");
-    tree.insert("zygomorphic");
-    tree.insert("zygomorphous");
-    tree.insert("zygote");
-    tree.insert("zygotes");
-    tree.insert("zygotic");
-    tree.insert("zygotically");
-    tree.insert("zygous");
-    tree.insert("zymase");
-    tree.insert("zymases");
-    tree.insert("zyme");
-    tree.insert("zymes");
-    tree.insert("zymogen");
-    tree.insert("zymogenic");
-    tree.insert("zymogens");
-    tree.insert("zymogram");
-    tree.insert("zymograms");
-    tree.insert("zymologies");
-    tree.insert("zymology");
+    // Inserciones
+    tree.insert("transact");
+    tree.insert("transaction");
+    tree.insert("transcend");
+    tree.insert("transcendental");
+    tree.insert("transcontinental");
+    tree.insert("transcript");
+    tree.insert("transcription");
+    tree.insert("transducer");
+    tree.insert("transduce");
+    tree.insert("transept");
+    tree.insert("transfer");
+    tree.insert("transference");
+    tree.insert("transfiguration");
+    tree.insert("transfix");
+    tree.insert("transform");
+    tree.insert("transformation");
+    tree.insert("transfuse");
+    tree.insert("transfusion");
+    tree.insert("transgress");
+    tree.insert("transgression");
+    tree.insert("transistor");
+    tree.insert("transit");
+    tree.insert("transition");
+    tree.insert("transitory");
+    tree.insert("translate");
+    tree.insert("translation");
+    tree.insert("translucent");
+    tree.insert("transmit");
+    tree.insert("transmission");
+    tree.insert("transmute");
 
-    // Removes
-    tree.remove("zygomatic");
-    tree.remove("zymases");
-    tree.remove("zyme");
-    tree.remove("zymes");
-    tree.remove("zymogen");
-    tree.remove("zymogenic");
-    tree.remove("zymogens");
-    tree.remove("zymogram");
-    tree.remove("zymograms");
-    tree.remove("zymologies");
-    tree.remove("zygomaticus");
-    tree.remove("zygomorphic");
-    tree.remove("zygomorphous");
-    tree.remove("zygote");
-    tree.remove("zygotes");
-    tree.remove("zygotes");tree.remove("zygotes");tree.remove("zygotes");tree.remove("zygotes");
-    tree.remove("zygotic");
-    tree.remove("zygotically");
-    tree.remove("zygous");
-    tree.remove("zymase");
-
-
-    // Searches
-    std::cout << "Search results:\n";
-    std::cout << "zygomatic: " << (tree.search("zygomatic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomaticus: " << (tree.search("zygomaticus") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphic: " << (tree.search("zygomorphic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphous: " << (tree.search("zygomorphous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygote: " << (tree.search("zygote") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotes: " << (tree.search("zygotes") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotic: " << (tree.search("zygotic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotically: " << (tree.search("zygotically") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygous: " << (tree.search("zygous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymase: " << (tree.search("zymase") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymases: " << (tree.search("zymases") ? "Found" : "Not found") << std::endl;
-    std::cout << "zyme: " << (tree.search("zyme") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymes: " << (tree.search("zymes") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymogen: " << (tree.search("zymogen") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymogenic: " << (tree.search("zymogenic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymogens: " << (tree.search("zymogens") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymogram: " << (tree.search("zymogram") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymograms: " << (tree.search("zymograms") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymologies: " << (tree.search("zymologies") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymology: " << (tree.search("zymology") ? "Found" : "Not found") << std::endl;
+    // Eliminaciones
+    tree.remove("transact");
+    tree.remove("transaction");
+    tree.remove("transcend");
+    tree.remove("transcendental");
+    tree.remove("transmute");
+    tree.remove("transcript");
+    tree.remove("transcription");
+    tree.remove("transducer");
+    tree.remove("transduce");
+    tree.remove("transept");
+    tree.remove("transfer");
+    tree.remove("transference");
+    tree.remove("transfiguration");
+    tree.remove("transfix");
+    tree.remove("transform");
+    tree.remove("transformation");
+    tree.remove("transfuse");
+    tree.remove("transfusion");
+    tree.remove("transgress");
+    tree.remove("transgression");
+    tree.remove("transistor");
+    tree.remove("transit");
+    tree.remove("transition");
+    tree.remove("transitory");
+    tree.remove("translate");
+    tree.remove("translation");
+    tree.remove("translucent");
+    tree.remove("transmit");
+    tree.remove("transmission");
 
 
-    tree.insert("zygomatic");
-    tree.insert("zygomaticus");
-    tree.insert("zygomorphic");
-    tree.insert("zygomorphous");
-    tree.insert("zygote");
-    tree.insert("zygotes");
-    tree.insert("zygotic");
-    tree.insert("zygotically");
-    tree.insert("zygous");
-    tree.insert("zymase");
-    tree.insert("zymases");
-    tree.insert("zyme");
+    // Búsquedas
+    std::cout << tree.search("transact") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("transaction") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("transcend") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("transcendental") << std::endl; // Output: 0 (false)
+    std::cout << tree.search("transcontinental") << std::endl; // Output: 0 (false)
+    std::cout << tree.search("transcript") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("transcription") << std::endl;  // Output: 0 (false)
+    std::cout << tree.search("transducer") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("transduce") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("transept") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("transfer") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("transference") << std::endl;   // Output: 0 (false)
+    std::cout << tree.search("transfiguration") << std::endl; // Output: 0 (false)
+    std::cout << tree.search("transfix") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("transform") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("transformation") << std::endl; // Output: 0 (false)
+    std::cout << tree.search("transfuse") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("transfusion") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("transgress") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("transgression") << std::endl;  // Output: 0 (false)
+    std::cout << tree.search("transistor") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("transit") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("transition") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("transitory") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("translate") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("translation") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("translucent") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("transmit") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("transmission") << std::endl;   // Output: 0 (false)
+    std::cout << tree.search("transmute") << std::endl;      // Output: 1 (true)
 
-    std::cout << "Search results:\n";
-    std::cout << "zygomatic: " << (tree.search("zygomatic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomaticus: " << (tree.search("zygomaticus") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphic: " << (tree.search("zygomorphic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphous: " << (tree.search("zygomorphous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygote: " << (tree.search("zygote") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotes: " << (tree.search("zygotes") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotic: " << (tree.search("zygotic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotically: " << (tree.search("zygotically") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygous: " << (tree.search("zygous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymase: " << (tree.search("zymase") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymases: " << (tree.search("zymases") ? "Found" : "Not found") << std::endl;
-    std::cout << "zyme: " << (tree.search("zyme") ? "Found" : "Not found") << std::endl;
+    cout<<"\n--------\n";
 
-    // Removes
-    tree.remove("zygomatic");
-    tree.remove("zygomaticus");
-    tree.remove("zygomorphic");
-    tree.remove("zygomorphous");
-    tree.remove("zygotes");
-    tree.remove("zygotic");
-    tree.remove("zygotically");
-    tree.remove("zygous");
-    tree.remove("zymase");
-    tree.remove("zymases");
-    tree.remove("zyme");
-
-    std::cout << "zygomatic: " << (tree.search("zygomatic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomaticus: " << (tree.search("zygomaticus") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphic: " << (tree.search("zygomorphic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygomorphous: " << (tree.search("zygomorphous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygote: " << (tree.search("zygote") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotes: " << (tree.search("zygotes") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotic: " << (tree.search("zygotic") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygotically: " << (tree.search("zygotically") ? "Found" : "Not found") << std::endl;
-    std::cout << "zygous: " << (tree.search("zygous") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymase: " << (tree.search("zymase") ? "Found" : "Not found") << std::endl;
-    std::cout << "zymases: " << (tree.search("zymases") ? "Found" : "Not found") << std::endl;
-    std::cout << "zyme: " << (tree.search("zyme") ? "Found" : "Not found") << std::endl;
+    auto* boleano = tree.get_root();
+    cout<<boleano->hash->solo_un_hijo()<<endl;
 
 
-    return 0;
+    boleano = boleano->hash->search(boleano->hash->encontrar_unico_hijo());
+
+    cout<<boleano->cadena<<endl;
+
+
 }

@@ -122,8 +122,6 @@ bool ArrayHash::solo_un_hijo() {
         }
     }
 
-
-
     if(ind==0) { return false; }
 
     return true;
@@ -137,8 +135,7 @@ char ArrayHash::encontrar_unico_hijo() {
 
     for(int i=0; i < 26; ++i)
         if(node->children[i]){
-            auto* node_hijo = node->children[i];
-            return node_hijo->cadena[0];
+            return node->children[i]->cadena[0];
         }
 }
 

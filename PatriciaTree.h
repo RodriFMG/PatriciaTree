@@ -34,7 +34,8 @@ public:
 
 
 void PatriciaTree::insert(string word) {
-    auto* node = root;
+    auto *node = root;
+
 
     while (!word.empty()) {
         string str{};
@@ -135,8 +136,10 @@ bool PatriciaTree::search(std::string word) {
 // Ver el único caso que falla.
 void PatriciaTree::remove(std::string word) {
 
-    auto* node = root;
 
+    if(!search(word)) return;
+
+    auto* node = root;
 
     if(root->hash->search(word[0])->leaf) {
         root->children[word[0] - 'a'] = nullptr;
@@ -165,22 +168,16 @@ void PatriciaTree::remove(std::string word) {
             cout<<"\n------\n";
             cout<<word<<" - "<<node->cadena<<"\n";
 
-
-
-
-            /* Si la palabra es parte de un nodo que tiene más hijos que son palabras.
-             * Se pone solamente ese hijo, de ser palabra a ya no serlo.*/
-
+            if(!node->is_word && word.empty()) break;
 
             if(node->hash->solo_un_hijo() && node->is_word){
                 if(word.empty()){
+                    cout<<"asd"<<endl;
                     char unico_enlace = node->hash->encontrar_unico_hijo();
 
                     auto* merge = node->hash->search(unico_enlace);
 
                     node->cadena += merge->cadena;
-
-
 
                     if(!merge->leaf){
                         for (int k = 0; k < 26; ++k) {
@@ -189,54 +186,95 @@ void PatriciaTree::remove(std::string word) {
                                 merge->children[k] = nullptr;
                             }
                         }
+                        node->is_word = false;
+                    }
+                    else {
+                        cout<<"aquipe"<<"\n";
+                        node->is_word = true;
+                        node->leaf = true;
                     }
 
-
-                    node->leaf = true;
                     node->children[node->hash->ind(unico_enlace)] = nullptr;
 
                 }
                 else{
-                    auto* ultimo = node->hash->search(word[0]);
 
-                    if(ultimo->cadena == word) {
+                    auto* merge = node->hash->search(word[0]);
 
-                        if(ultimo->leaf) node->leaf = true;
+                    cout<<"dfg";
+                    if(merge->cadena == word) {
+
+                        if(merge->leaf) node->leaf = true;
+                        else if(merge->is_word){
+                            for (int k = 0; k < 26; ++k) {
+                                if (merge->children[k]) {
+                                    merge->children[k]->cadena = merge->cadena + merge->children[k]->cadena;
+                                    node->children[k] = merge->children[k];
+                                    merge->children[k] = nullptr;
+                                }
+                            }
+                            node->is_word = true;
+                        }
 
                         node->children[word[0] - 'a'] = nullptr;
 
                     }
+                    else continue;
                 }
 
                 break;
             }
             else if(word.empty() && node->is_word && !node->hash->solo_un_hijo()) {
+                cout<<"porque mrd esta aqui";
                 node->is_word = false;
+                break;
             }
                 /* En caso tenga 2 hijos y justo el hijo que voy a borrar es hoja, pues re ajusto
                  * el hijo del otro lado con el nodo actual. (Sus enlaces del nodo de importan
                  * porque se irán junto con el padre arriba.)*/
 
                 // Esta bien.
-            else if(node->hash->encontrar_2_hijos() && node->hash->search(word[0])->leaf){
 
+             if(!node->hash->solo_un_hijo() && node->hash->search(word[0])->leaf){
+
+                 cout<<"entro\n";
                 node->children[node->hash->ind(word[0])] = nullptr;
 
-
                 if(node->hash->solo_un_hijo()){
+                    cout<<"peeee\n";
 
-                    char unico_enlace = node->hash->encontrar_unico_hijo();
-
-                    auto* merge = node->hash->search(unico_enlace);
 
                     if(!node->is_word){
 
-                        node->cadena += merge->cadena;
+                        char unico_enlace = node->hash->encontrar_unico_hijo();
 
-                        for (int k = 0; k < 26; ++k) {
-                            if (merge->children[k]) {
-                                node->children[k] = merge->children[k];
-                                merge->children[k] = nullptr;
+                        auto* merge = node->hash->search(unico_enlace);
+
+                        //cout<<node->cadena<<" 1\n";
+                        node->cadena += merge->cadena;
+                        //cout<<node->cadena<<" 2\n";
+
+                        if(!merge->leaf){
+                            bool repetido = false;
+                            for (int k = 0; k < 26; ++k) {
+                                if (merge->children[k]) {
+                                    if(node->children[k]){
+                                        if(node->children[k]->cadena[0] == merge->children[k]->cadena[0]) repetido = true;
+                                    }
+                                    node->children[k] = merge->children[k];
+                                    merge->children[k] = nullptr;
+                                }
+                            }
+
+                            if(repetido) {
+
+                                if(merge->is_word) node->is_word = true;
+                                else node->is_word = false;
+
+                                if(merge->leaf) node->leaf = true;
+                                else node->leaf = false;
+
+                                break;
                             }
                         }
 
@@ -244,26 +282,28 @@ void PatriciaTree::remove(std::string word) {
                         else node->is_word = false;
 
                         if(merge->leaf) node->leaf = true;
+                        else node->leaf = false;
 
                         node->children[node->hash->ind(unico_enlace)] = nullptr;
-
                     }
 
+                }
+                else{
+                    cout<<"jjijjia\n";
                 }
 
 
                 break;
 
             }
-            else if(!node->is_word && word.empty()) break;
 
 
             /// Puede que no sea necesario.
-            //if(!word.empty() && !node->is_word && node->hash->encontrar_mas_de_2_hijos() && node->hash->search(word[0])->leaf){
+            if(!word.empty() && !node->is_word && node->hash->encontrar_mas_de_2_hijos() && node->hash->search(word[0])->leaf){
 
-              //  node->children[word[0]] = nullptr;
-                // break;
-            // }
+                node->children[word[0]] = nullptr;
+                 break;
+            }
 
         }
         else break;

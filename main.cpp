@@ -1,104 +1,164 @@
 #include "PatriciaTree.h"
 
 int main() {
-
     PatriciaTree tree;
 
-    // Inserciones
-    tree.insert("transact");
-    tree.insert("transaction");
-    tree.insert("transcend");
-    tree.insert("transcendental");
-    tree.insert("transcontinental");
-    tree.insert("transcript");
-    tree.insert("transcription");
-    tree.insert("transducer");
-    tree.insert("transduce");
-    tree.insert("transept");
-    tree.insert("transfer");
-    tree.insert("transference");
-    tree.insert("transfiguration");
-    tree.insert("transfix");
-    tree.insert("transform");
-    tree.insert("transformation");
-    tree.insert("transfuse");
-    tree.insert("transfusion");
-    tree.insert("transgress");
-    tree.insert("transgression");
-    tree.insert("transistor");
-    tree.insert("transit");
-    tree.insert("transition");
-    tree.insert("transitory");
-    tree.insert("translate");
-    tree.insert("translation");
-    tree.insert("translucent");
-    tree.insert("transmit");
-    tree.insert("transmission");
-    tree.insert("transmute");
+// 50 inserciones
+    tree.insert("proactive");
+    tree.insert("probability");
+    tree.insert("probable");
+    tree.insert("probably");
+    tree.insert("probe");
+    tree.insert("problem");
+    tree.insert("procedure");
+    tree.insert("process");
+    tree.insert("processor");
+    tree.insert("proclaim");
+    tree.insert("procure");
+    tree.insert("produce");
+    tree.insert("product");
+    tree.insert("production");
+    tree.insert("productive");
+    tree.insert("productivity");
+    tree.insert("profession");
+    tree.insert("professional");
+    tree.insert("professor");
+    tree.insert("profile");
+    tree.insert("profit");
+    tree.insert("profound");
+    tree.insert("program");
+    tree.insert("programmer");
+    tree.insert("progress");
+    tree.insert("progressive");
+    tree.insert("prohibit");
+    tree.insert("project");
+    tree.insert("projection");
+    tree.insert("prolific");
+    tree.insert("prolong");
+    tree.insert("prominent");
+    tree.insert("promise");
+    tree.insert("promote");
+    tree.insert("promotion");
+    tree.insert("prompt");
+    tree.insert("pronounce");
+    tree.insert("proof");
+    tree.insert("propel");
+    tree.insert("proper");
+    tree.insert("property");
+    tree.insert("proportion");
+    tree.insert("proposal");
+    tree.insert("propose");
+    tree.insert("prospect");
+    tree.insert("prosper");
+    tree.insert("protect");
+    tree.insert("protection");
+    tree.insert("protest");
+    tree.insert("protocol");
 
-    // Eliminaciones
-    tree.remove("transact");
-    tree.remove("transaction");
-    tree.remove("transcend");
-    tree.remove("transcendental");
-    tree.remove("transmute");
-    tree.remove("transcript");
-    tree.remove("transcription");
-    tree.remove("transducer");
-    tree.remove("transduce");
-    tree.remove("transept");
-    tree.remove("transfer");
-    tree.remove("transference");
-    tree.remove("transfiguration");
-    tree.remove("transfix");
-    tree.remove("transform");
-    tree.remove("transformation");
-    tree.remove("transfuse");
-    tree.remove("transfusion");
-    tree.remove("transgress");
-    tree.remove("transgression");
-    tree.remove("transistor");
-    tree.remove("transit");
-    tree.remove("transition");
-    tree.remove("transitory");
-    tree.remove("translate");
-    tree.remove("translation");
-    tree.remove("translucent");
-    tree.remove("transmit");
-    tree.remove("transmission");
+// 49 eliminaciones en el mismo orden de inserción
 
 
-    // Búsquedas
-    std::cout << tree.search("transact") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("transaction") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("transcend") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("transcendental") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("transcontinental") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("transcript") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("transcription") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("transducer") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("transduce") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("transept") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("transfer") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("transference") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("transfiguration") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("transfix") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("transform") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("transformation") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("transfuse") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("transfusion") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("transgress") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("transgression") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("transistor") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("transit") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("transition") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("transitory") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("translate") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("translation") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("translucent") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("transmit") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("transmission") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("transmute") << std::endl;      // Output: 1 (true)
+    tree.remove("proactive");
+    tree.remove("programmer");
+    tree.remove("proposal");
+    tree.remove("proper");
+    tree.remove("property");
+    tree.remove("probability");
+    tree.remove("pronounce");
+    tree.remove("prospect");
+    tree.remove("process");
+    tree.remove("project");
+    tree.remove("problem");
+    tree.remove("proof");
+    tree.remove("probable");
+    tree.remove("prosper");
+    tree.remove("product");
+    tree.remove("progress");
+    tree.remove("progressive");
+    tree.remove("productive");
+    tree.remove("productivity");
+    tree.remove("protect");
+    tree.remove("proclaim");
+    tree.remove("procure");
+    tree.remove("produce");
+    tree.remove("profession");
+    tree.remove("professional");
+    tree.remove("professor");
+    tree.remove("profit");
+    tree.remove("profound");
+    tree.remove("production");
+    tree.remove("probably");
+    tree.remove("probe");
+    tree.remove("proportion");
+    tree.remove("procedure");
+    tree.remove("prohibit");
+    tree.remove("processor");
+    tree.remove("program");
+    tree.remove("propel");
+    tree.remove("projection");
+    tree.remove("prolific");
+    tree.remove("prolong");
+    tree.remove("prominent");
+    tree.remove("promise");
+    tree.remove("promote");
+    tree.remove("promotion");
+    tree.remove("prompt");
+    tree.remove("propose");
+    tree.remove("protection");
+    tree.remove("protest");
+    tree.remove("profile");
+
+// Búsquedas
+    std::cout << tree.search("proactive") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("probability") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("probable") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("probably") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("probe") << std::endl;           // Output: 0 (false)
+    std::cout << tree.search("problem") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("procedure") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("process") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("processor") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("proclaim") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("procure") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("produce") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("product") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("production") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("productive") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("productivity") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("profession") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("professional") << std::endl;    // Output: 0 (false)
+    std::cout << tree.search("professor") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("profile") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("profit") << std::endl;          // Output: 0 (false)
+    std::cout << tree.search("profound") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("program") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("programmer") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("progress") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("progressive") << std::endl;     // Output: 0 (false)
+    std::cout << tree.search("prohibit") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("project") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("projection") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("prolific") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("prolong") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("prominent") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("promise") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("promote") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("promotion") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("prompt") << std::endl;          // Output: 0 (false)
+    std::cout << tree.search("pronounce") << std::endl;       // Output: 0 (false)
+    std::cout << tree.search("proof") << std::endl;           // Output: 0 (false)
+    std::cout << tree.search("propel") << std::endl;          // Output: 0 (false)
+    std::cout << tree.search("proper") << std::endl;          // Output: 0 (false)
+    std::cout << tree.search("property") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("proportion") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("proposal") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("propose") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("prospect") << std::endl;        // Output: 0 (false)
+    std::cout << tree.search("prosper") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("protect") << std::endl;         // Output: 0 (false)
+    std::cout << tree.search("protection") << std::endl;      // Output: 0 (false)
+    std::cout << tree.search("protest") << std::endl;         // Output: 1 (true)
+    std::cout << tree.search("protocol") << std::endl;        // Output: 1 (true)
 
     cout<<"\n--------\n";
 
@@ -107,7 +167,7 @@ int main() {
 
 
     boleano = boleano->hash->search(boleano->hash->encontrar_unico_hijo());
-
+    cout<<boleano->hash->solo_un_hijo()<<endl;
     cout<<boleano->cadena<<endl;
 
 

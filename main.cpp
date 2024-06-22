@@ -1,10 +1,7 @@
 #include "PatriciaTree.h"
 #include "chrono"
 
-int main() {
-
-    auto start = std::chrono::high_resolution_clock::now();
-
+void ejemplo_100_words(){
     PatriciaTree tree;
 
 // Inserciones
@@ -98,7 +95,7 @@ int main() {
     tree.insert("subwoofer");
     tree.insert("subzone");
     tree.insert("subaqueous");
-    tree.insert("subarachnoid");
+    tree.insert("sUbAraChNoi");
     tree.insert("subatomic");
     tree.insert("subbranch");
     tree.insert("subbasement");
@@ -210,6 +207,7 @@ int main() {
     tree.remove("subshell");
     tree.remove("subsidization");
     tree.remove("substandard");
+    tree.remove("subarachnoi");
 
 // Búsquedas
     std::cout << tree.search("submarine") << std::endl;     // Output: 0 (false)
@@ -283,10 +281,12 @@ int main() {
     std::cout << tree.search("subsection") << std::endl;    // Output: 0 (false)
     std::cout << tree.search("subsegment") << std::endl;    // Output: 0 (false)
     std::cout << tree.search("subsentence") << std::endl;   // Output: 0 (false)
+    std::cout << tree.search("subsentence") << std::endl;   // Output: 0 (false)
     std::cout << tree.search("subsequences") << std::endl;  // Output: 0 (false)
     std::cout << tree.search("subservience") << std::endl;  // Output: 0 (false)
     std::cout << tree.search("subshell") << std::endl;      // Output: 0 (false)
     std::cout << tree.search("subsidization") << std::endl; // Output: 0 (false)
+    std::cout << tree.search("subarachnoi") << std::endl; // Output: 0 (false)
     std::cout << tree.search("substandard") << std::endl;   // Output: 0 (false)
     std::cout << tree.search("subsumption") << std::endl;   // Output: 0 (false)
     std::cout << tree.search("subtenant") << std::endl;     // Output: 0 (false)
@@ -302,11 +302,28 @@ int main() {
 
 // El último insert no se elimina, por lo tanto, su búsqueda debe devolver true
     std::cout << tree.search("subgraph") << std::endl;      // Output: 1 (true)
+}
+
+
+
+int main() {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    PatriciaTree tree;
+
+    tree.insert("a");
+    tree.insert("ab");
+    tree.insert("abc");
+    tree.insert("abd");
+
+    tree.remove("ab");
+
     cout<<"\n--------\n";
 
-    auto* booleano = tree.get('s');
-//
-//
+    auto* booleano = tree.get('a');
+    booleano = booleano->hash->search('b');
+
     cout<<booleano->cadena<<endl;
 
     auto end = std::chrono::high_resolution_clock::now();

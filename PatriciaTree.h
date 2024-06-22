@@ -6,6 +6,7 @@
 #define PATRICIATREE_PATRICIATREE_H
 
 #include "Node.h"
+#include "Queue.h"
 
 class PatriciaTree{
 private:
@@ -18,7 +19,7 @@ public:
     };
 
     void insert(string word);
-    bool search(string word);
+    bool search(const string& word);
     void remove(string word);
 
 
@@ -63,7 +64,7 @@ void PatriciaTree::insert(string word) {
 
             if (node->cadena.empty()) {
                 node->cadena = str;
-                if (!word.empty()) node->leaf = false;
+                if (!word.empty() && node->leaf) node->leaf = false;
 
                 continue;
             }
@@ -101,24 +102,23 @@ void PatriciaTree::insert(string word) {
 }
 
 
-bool PatriciaTree::search(std::string word) {
+bool PatriciaTree::search(const std::string& word) {
 
     auto* node = root;
+    auto* queue_word = new Queue(word);
 
-    while(!word.empty()){
-        if(node->hash->esta_o_no(word[0])){
-            node = node->hash->search(word[0]);
+    while(!queue_word->empty()){
+        if(node->hash->esta_o_no(queue_word->first_element())){
+            node = node->hash->search(queue_word->first_element());
 
-            if(node->is_word && node->cadena == word) return true;
+            if(node->is_word && node->cadena == queue_word->cadena_rango()) return true;
 
-            int i{},j{};
-            while(!word.empty() && !node->cadena.empty()){
-                if(word[i] == node->cadena[j]) {
-                    word.erase(0, 1);
-                    --i;
+            int j{};
+            while(!queue_word->empty() && !node->cadena.empty()){
+                if(queue_word->first_element() == node->cadena[j]) {
+                    queue_word->pop();
                 }
                 else break;
-                ++i;
                 j++;
             }
 
@@ -146,33 +146,24 @@ void PatriciaTree::remove(std::string word) {
         return;
     }
 
-    while(!word.empty()){
-        if(node->hash->esta_o_no(word[0])){
-            node = node->hash->search(word[0]);
+    auto* queue_word = new Queue(word);
 
-            int i{};
+    while(!queue_word->empty()){
+        if(node->hash->esta_o_no(queue_word->first_element())){
+            node = node->hash->search(queue_word->first_element());
+
             int j{};
-            while(!word.empty()){
-                if(word[i] == node->cadena[j]){
-
-                    // mejorar esto
-                    word.erase(0,1);
-
-                    --i;
-                }
+            while(!queue_word->empty()){
+                if(queue_word->first_element() == node->cadena[j]) queue_word->pop();
                 else break;
-                ++i;
                 ++j;
             }
 
-            cout<<"\n------\n";
-            cout<<word<<" - "<<node->cadena<<"\n";
-
-            if(!node->is_word && word.empty()) break;
+            if(!node->is_word && queue_word->empty()) break;
 
             if(node->hash->solo_un_hijo() && node->is_word){
-                if(word.empty()){
-                    cout<<"asd"<<endl;
+                if(queue_word->empty()){
+
                     char unico_enlace = node->hash->encontrar_unico_hijo();
 
                     auto* merge = node->hash->search(unico_enlace);
@@ -189,7 +180,6 @@ void PatriciaTree::remove(std::string word) {
                         node->is_word = false;
                     }
                     else {
-                        cout<<"aquipe"<<"\n";
                         node->is_word = true;
                         node->leaf = true;
                     }
@@ -199,10 +189,9 @@ void PatriciaTree::remove(std::string word) {
                 }
                 else{
 
-                    auto* merge = node->hash->search(word[0]);
+                    auto* merge = node->hash->search(queue_word->first_element());
 
-                    cout<<"dfg";
-                    if(merge->cadena == word) {
+                    if(merge->cadena == queue_word->cadena_rango()) {
 
                         if(merge->leaf) node->leaf = true;
                         else if(merge->is_word){
@@ -216,7 +205,7 @@ void PatriciaTree::remove(std::string word) {
                             node->is_word = true;
                         }
 
-                        node->children[word[0] - 'a'] = nullptr;
+                        node->children[queue_word->first_element() - 'a'] = nullptr;
 
                     }
                     else continue;
@@ -224,8 +213,7 @@ void PatriciaTree::remove(std::string word) {
 
                 break;
             }
-            else if(word.empty() && node->is_word && !node->hash->solo_un_hijo()) {
-                cout<<"porque mrd esta aqui";
+            else if(queue_word->empty() && node->is_word && !node->hash->solo_un_hijo()) {
                 node->is_word = false;
                 break;
             }
@@ -235,13 +223,11 @@ void PatriciaTree::remove(std::string word) {
 
                 // Esta bien.
 
-             if(!node->hash->solo_un_hijo() && node->hash->search(word[0])->leaf){
+             if(!node->hash->solo_un_hijo() && node->hash->search(queue_word->first_element())->leaf){
 
-                 cout<<"entro\n";
-                node->children[node->hash->ind(word[0])] = nullptr;
+                node->children[node->hash->ind(queue_word->first_element())] = nullptr;
 
                 if(node->hash->solo_un_hijo()){
-                    cout<<"peeee\n";
 
 
                     if(!node->is_word){
@@ -288,9 +274,6 @@ void PatriciaTree::remove(std::string word) {
                     }
 
                 }
-                else{
-                    cout<<"jjijjia\n";
-                }
 
 
                 break;
@@ -298,12 +281,14 @@ void PatriciaTree::remove(std::string word) {
             }
 
 
-            /// Puede que no sea necesario.
-            if(!word.empty() && !node->is_word && node->hash->encontrar_mas_de_2_hijos() && node->hash->search(word[0])->leaf){
 
-                node->children[word[0]] = nullptr;
+            /// Puede que no sea necesario.
+            if(!word.empty() && !node->is_word && node->hash->encontrar_mas_de_2_hijos() && node->hash->search(queue_word->first_element())->leaf){
+
+                node->children[queue_word->first_element()] = nullptr;
                  break;
             }
+
 
         }
         else break;

@@ -122,7 +122,10 @@ bool ArrayHash::solo_un_hijo() {
         }
     }
 
-    if(ind==0) { return false; }
+    if(ind==0) {
+        cout<<"No tiene hijos."<<endl;
+        return false;
+    }
 
     return true;
 }

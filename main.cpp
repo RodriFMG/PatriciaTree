@@ -293,11 +293,59 @@ void ejemplo1_random(){
     cout<<booleano->cadena<<endl;
 }
 
+void ejemplo_4_100_random(){
+    PatriciaTree trie;
+    std::vector<std::string> words = {
+            "apple", "apricot", "banana", "bandana", "cherry", "chocolate", "date", "dandelion", "elderberry", "elephant",
+            "fig", "filament", "grape", "grapefruit", "honeydew", "honey", "kiwi", "kite", "lemon", "leopard",
+            "mango", "mangrove", "nectarine", "nectar", "orange", "orangutan", "papaya", "paper", "quince", "quilt",
+            "raspberry", "rasp", "strawberry", "straw", "tangerine", "tango", "ugli", "umbrella", "vanilla", "van",
+            "watermelon", "water", "xigua", "xylophone", "yellowfruit", "yellow", "zucchini", "zebra", "aardvark", "avocado",
+            "blueberry", "blackberry", "coconut", "cranberry", "dragonfruit", "durian", "eggplant", "elderflower", "figs",
+            "grapes", "greenapple", "huckleberry", "jackfruit", "kiwifruit", "lemonade", "lime", "mandarin", "mulberry",
+            "olive", "oranges", "passionfruit", "peach", "pear", "persimmon", "pineapple", "plum", "pomegranate",
+            "raspberries", "redcurrant", "starfruit", "sugarapple", "tomato", "watercress", "yams", "yambean", "yucca",
+            "ziziphus", "zapote", "zinfandel", "cherries", "soursop", "salmonberry", "longan", "loquat"
+    };
+
+    std::unordered_set<std::string> unique_words_set(words.begin(), words.end());
+    std::vector<std::string> unique_words(unique_words_set.begin(), unique_words_set.end());
+
+    // Insert all unique words into the trie
+    for (const auto &word : unique_words) {
+        trie.insert(word);
+    }
+
+
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(unique_words.begin(), unique_words.end(), g);
+
+    // Remove 99 words randomly
+    for (size_t i = 0; i < unique_words.size() - 1; ++i) {
+        trie.remove(unique_words[i]);
+    }
+
+    // Search for each word to confirm insertion and removal
+    for (const auto &word : unique_words) {
+        std::cout << "Word: " << word << " (search: " << (trie.search(word) ? "true" : "false") << ")\n";
+    }
+
+    cout<<"\n--------\n";
+
+    auto* booleano = trie.root_get();
+    booleano = booleano->hash->search(booleano->hash->encontrar_unico_hijo());
+
+    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
+    cout<<booleano->cadena<<endl;
+
+}
+
 int main() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    ejemplo1_100_words();
+    ejemplo_4_100_random();
 
 
     auto end = std::chrono::high_resolution_clock::now();

@@ -26,6 +26,11 @@ public:
     Node* get(char pe){
         return root->hash->search(pe);
     }
+
+    Node* root_get(){
+        return root;
+    }
+
 };
 
 

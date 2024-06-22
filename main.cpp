@@ -1,10 +1,52 @@
 #include "PatriciaTree.h"
 #include "chrono"
+#include "random"
+#include <unordered_set>
 
-void ejemplo_100_words(){
+
+void ejemplo1_100_words(){
+    PatriciaTree trie;
+
+    std::vector<std::string> words = {
+            "combination", "combine", "comparable", "compare", "compass", "compatible", "compel", "compensate", "competence", "competent", "competition", "competitive", "competitor", "complain", "complete", "completion", "complex", "complexity", "compliance", "complicate", "complication", "complicity", "compliment", "component", "compose", "composition", "compound", "comprehensive", "compress", "compression", "comprise", "compromise", "compute", "computer", "comrade", "comprehensive", "comprehend", "compressor", "compulsion", "compulsive", "compunction", "comptroller", "comeback", "comedian", "comedy", "comet", "comfort", "comfortable", "comic", "command", "commander", "commence", "commencement", "commend", "comment", "commerce", "commercial", "commission", "commit", "commitment", "committee", "commodity", "common", "communal", "communicate", "communication", "communion", "communist", "community", "commute", "compact", "companion", "company", "comparison", "compartment", "compatible", "compel", "compensate", "competence", "competent", "competition", "competitive", "competitor", "complain", "complaint", "complete", "completion", "complex", "complexity", "comply", "component", "compose", "composition", "compound", "compress", "compression", "compromise", "compute", "computer", "comrade"
+    };
+
+    std::unordered_set<std::string> unique_words_set(words.begin(), words.end());
+    std::vector<std::string> unique_words(unique_words_set.begin(), unique_words_set.end());
+
+    for(const auto& word : unique_words){
+        trie.insert(word);
+    }
+
+    // Mezclar el vector de palabras para remover en orden aleatorio
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(unique_words.begin(), unique_words.end(), g);
+
+    // Eliminar todas menos una
+    for(size_t i = 0; i < unique_words.size() - 1; ++i) {
+        trie.remove(unique_words[i]);
+    }
+
+
+    // Realizar búsquedas para todas las palabras
+    for(const auto& word : unique_words) {
+        std::cout << word << ": " << (trie.search(word) ? "true" : "false") << std::endl;
+    }
+
+    cout<<"\n--------\n";
+
+    auto* booleano = trie.get('c');
+
+    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
+    cout<<booleano->cadena<<endl;
+
+}
+
+void ejemplo2_100_words(){
+
     PatriciaTree tree;
 
-// Inserciones
     tree.insert("submarine");
     tree.insert("submerge");
     tree.insert("substantial");
@@ -107,209 +149,38 @@ void ejemplo_100_words(){
     tree.insert("subfix");
     tree.insert("subgraph");
 
-// Eliminaciones
+    std::vector<std::string> words = {
+            "submarine", "submerge", "substantial", "substitute", "subdivide", "subdue", "subject", "subjugate", "sublime", "submarine", "submit", "subordinate", "subscribe", "subsequent", "subservient", "subside", "subsidiary", "subsidize", "subsist", "subsoil", "subsonic", "substance", "substantial", "substantiate", "substation", "substitute", "substitution", "subtitle", "subtle", "subtly", "subtotal", "subtract", "subtraction", "subtropical", "suburb", "suburban", "suburbia", "subvention", "subversion", "subversive", "subvert", "subway", "subzero", "subterfuge", "subterranean", "subtext", "subtend", "subgenre", "subclavian", "subconscious", "subcritical", "subculture", "subcutaneously", "subfamily", "subhuman", "subjection", "subjoin", "subjugation", "sublease", "subliterate", "subluxation", "subnormal", "suborder", "subpopulation", "subprogram", "subregion", "subroutine", "subsample", "subscale", "subsection", "subsegment", "subsentence", "subsequences", "subservience", "subshell", "subsidization", "substandard", "subsumption", "subtenant", "subterminal", "subthalamic", "subtheme", "subthreshold", "subtitle", "suburbia", "subvariety", "subvocalization", "subwoofer", "subzone", "subaqueous", "sUbAraChNoi", "subatomic", "subbranch", "subbasement", "subcommittee", "subcontract", "subdivide", "subduable", "subfield", "subfix", "subgraph"
+    };
 
-    tree.remove("substantial");
-    tree.remove("substitute");
-    tree.remove("subdivide");
-    tree.remove("subdue");
-    tree.remove("subject");
-    tree.remove("subside");
-    tree.remove("subsidiary");
-    tree.remove("subsidize");
-    tree.remove("subsist");
-    tree.remove("subsoil");
-    tree.remove("subsonic");
-    tree.remove("substance");
-    tree.remove("substantial");
-    tree.remove("substantiate");
-    tree.remove("subbasement");
-    tree.remove("subcommittee");
-    tree.remove("subversive");
-    tree.remove("subvert");
-    tree.remove("subway");
-    tree.remove("substation");
-    tree.remove("subtotal");
-    tree.remove("subtract");
-    tree.remove("subtraction");
-    tree.remove("subjugate");
-    tree.remove("sublime");
-    tree.remove("submarine");
-    tree.remove("submerge");
-    tree.remove("submit");
-    tree.remove("subzero");
-    tree.remove("subterfuge");
-    tree.remove("subterranean");
-    tree.remove("subordinate");
-    tree.remove("subscribe");
-    tree.remove("subsequent");
-    tree.remove("subtropical");
-    tree.remove("suburb");
-    tree.remove("suburban");
-    tree.remove("suburbia");
-    tree.remove("subvention");
-    tree.remove("subversion");
-    tree.remove("subjoin");
-    tree.remove("substitute");
-    tree.remove("subroutine");
-    tree.remove("subsample");
-    tree.remove("subscale");
-    tree.remove("subsection");
-    tree.remove("subsegment");
-    tree.remove("substitution");
-    tree.remove("subterminal");
-    tree.remove("subthalamic");
-    tree.remove("subtitle");
-    tree.remove("subzone");
-    tree.remove("subaqueous");
-    tree.remove("subservient");
-    tree.remove("subjugation");
-    tree.remove("subtheme");
-    tree.remove("subthreshold");
-    tree.remove("suburbia");
-    tree.remove("subarachnoid");
-    tree.remove("subatomic");
-    tree.remove("subbranch");
-    tree.remove("subtle");
-    tree.remove("subtly");
-    tree.remove("subvariety");
-    tree.remove("subvocalization");
-    tree.remove("subsumption");
-    tree.remove("subtenant");
-    tree.remove("subwoofer");
-    tree.remove("subtext");
-    tree.remove("subtend");
-    tree.remove("subgenre");
-    tree.remove("subclavian");
-    tree.remove("subconscious");
-    tree.remove("subcritical");
-    tree.remove("subculture");
-    tree.remove("subcutaneously");
-    tree.remove("subfamily");
-    tree.remove("subhuman");
-    tree.remove("subjection");
-    tree.remove("subcontract");
-    tree.remove("subdivide");
-    tree.remove("subduable");
-    tree.remove("subfield");
-    tree.remove("subfix");
-    tree.remove("sublease");
-    tree.remove("subliterate");
-    tree.remove("subluxation");
-    tree.remove("subnormal");
-    tree.remove("suborder");
-    tree.remove("subpopulation");
-    tree.remove("subprogram");
-    tree.remove("subregion");
-    tree.remove("subsentence");
-    tree.remove("subsequences");
-    tree.remove("subservience");
-    tree.remove("subshell");
-    tree.remove("subsidization");
-    tree.remove("substandard");
-    tree.remove("subarachnoi");
+    std::unordered_set<std::string> unique_words_set(words.begin(), words.end());
+    std::vector<std::string> unique_words(unique_words_set.begin(), unique_words_set.end());
 
-// Búsquedas
-    std::cout << tree.search("submarine") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("submerge") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("substantial") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("substitute") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subdivide") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subdue") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("subject") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subjugate") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("sublime") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("submit") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("subordinate") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subscribe") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subsequent") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subservient") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subside") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subsidiary") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subsidize") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subsist") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subsoil") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subsonic") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("substance") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("substantial") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("substantiate") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("substation") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("substitute") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("substitution") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("subtitle") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subtle") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("subtly") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("subtotal") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subtract") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subtraction") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subtropical") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("suburb") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("suburban") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("suburbia") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subvention") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subversion") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subversive") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subvert") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subway") << std::endl;        // Output: 0 (false)
-    std::cout << tree.search("subzero") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subterfuge") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subterranean") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("subtext") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subtend") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subgenre") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subclavian") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subconscious") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("subcritical") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subculture") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subcutaneously") << std::endl;// Output: 0 (false)
-    std::cout << tree.search("subfamily") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subhuman") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subjection") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subjoin") << std::endl;       // Output: 0 (false)
-    std::cout << tree.search("subjugation") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("sublease") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subliterate") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subluxation") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subnormal") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("suborder") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subpopulation") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("subprogram") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subregion") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subroutine") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subsample") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subscale") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subsection") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subsegment") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subsentence") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subsentence") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subsequences") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("subservience") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("subshell") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subsidization") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("subarachnoi") << std::endl; // Output: 0 (false)
-    std::cout << tree.search("substandard") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subsumption") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subtenant") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subterminal") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subthalamic") << std::endl;   // Output: 0 (false)
-    std::cout << tree.search("subtheme") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subthreshold") << std::endl;  // Output: 0 (false)
-    std::cout << tree.search("suburbia") << std::endl;      // Output: 0 (false)
-    std::cout << tree.search("subvariety") << std::endl;    // Output: 0 (false)
-    std::cout << tree.search("subvocalization") << std::endl;// Output: 0 (false)
-    std::cout << tree.search("subwoofer") << std::endl;     // Output: 0 (false)
-    std::cout << tree.search("subzone") << std::endl;       // Output: 0 (false)
+    // Mezclar el vector de palabras para remover en orden aleatorio
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(unique_words.begin(), unique_words.end(), g);
 
-// El último insert no se elimina, por lo tanto, su búsqueda debe devolver true
-    std::cout << tree.search("subgraph") << std::endl;      // Output: 1 (true)
+    // Eliminar todas menos una
+    for(size_t i = 0; i < unique_words.size() - 1; ++i) {
+        tree.remove(unique_words[i]);
+    }
+
+
+    // Realizar búsquedas para todas las palabras
+    for(const auto& word : unique_words) {
+        std::cout << word << ": " << (tree.search(word) ? "true" : "false") << std::endl;
+    }
+
+    cout<<"\n--------\n";
+
+    auto* booleano = tree.get('s');
+
+    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
+    cout<<booleano->cadena<<endl;
 }
 
-
-
-int main() {
-
-    auto start = std::chrono::high_resolution_clock::now();
-
+void ejemplo3_4_word(){
     PatriciaTree tree;
 
     tree.insert("a");
@@ -317,14 +188,117 @@ int main() {
     tree.insert("abc");
     tree.insert("abd");
 
-    tree.remove("ab");
+    tree.remove("abc");
+
+    auto* booleano = tree.get('a');
+
+    booleano = booleano->hash->search('b');
+    cout<<boolalpha<<booleano->is_word<<endl;
+    cout<<booleano->cadena<<endl;
+
+    booleano = booleano->hash->search('d');
+    cout<<boolalpha<<booleano->is_word<<endl;
+    cout<<booleano->cadena<<endl;
+
+}
+
+void ejemplo1_random(){
+    PatriciaTree trie;
+
+    // Insertar palabras
+    trie.insert("combustion");
+    trie.insert("combustible");
+    trie.insert("comburent");
+    trie.insert("combinate");
+    trie.insert("combinator");
+    trie.insert("combative");
+    trie.insert("combatant");
+    trie.insert("combusting");
+    trie.insert("combination");
+    trie.insert("combated");
+    trie.insert("combiner");
+    trie.insert("combings");
+    trie.insert("combers");
+    trie.insert("combfish");
+    trie.insert("combating");
+    trie.insert("combattery");
+    trie.insert("combusted");
+    trie.insert("combattive");
+    trie.insert("combless");
+    trie.insert("combry");
+    trie.insert("combinational");
+    trie.insert("combatedly");
+    trie.insert("combater");
+    trie.insert("combatedness");
+    trie.insert("combatingly");
+    trie.insert("combing");
+    trie.insert("comblike");
+    trie.insert("combolden");
+    trie.insert("combatted");
+    trie.insert("combbed");
+    trie.insert("comband");
+    trie.insert("combow");
+    trie.insert("combearing");
+    trie.insert("combplay");
+    trie.insert("combvent");
+    trie.insert("combgate");
+    trie.insert("combgrove");
+    trie.insert("combmantle");
+    trie.insert("combtrap");
+    trie.insert("combreform");
+    trie.insert("combgrass");
+    trie.insert("combguard");
+    trie.insert("combhunt");
+    trie.insert("combnet");
+    trie.insert("combroot");
+    trie.insert("combsand");
+    trie.insert("combtoy");
+    trie.insert("combvow");
+    trie.insert("combwind");
+
+    // Eliminar palabras en orden aleatorio
+    std::vector<std::string> words = {
+            "combustion", "combustible", "comburent", "combinate", "combinator",
+            "combative", "combatant", "combusting", "combination", "combated",
+            "combiner", "combings", "combers", "combfish", "combating", "combattery",
+            "combusted", "combattive", "combless", "combry", "combinational",
+            "combatedly", "combater", "combatedness", "combatingly", "combing",
+            "comblike", "combolden", "combatted", "combbed", "comband", "combow",
+            "combearing", "combplay", "combvent", "combgate", "combgrove", "combmantle",
+            "combtrap", "combreform", "combgrass", "combguard", "combhunt", "combnet",
+            "combroot", "combsand", "combtoy", "combvow", "combwind"
+    };
+
+    // Mezclar el vector de palabras para remover en orden aleatorio
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(words.begin(), words.end(), g);
+
+    // Eliminar todas menos una
+    for(size_t i = 0; i < words.size() - 1; ++i) {
+        trie.remove(words[i]);
+    }
+
+
+    // Realizar búsquedas para todas las palabras
+    for(const auto& word : words) {
+        std::cout << word << ": " << (trie.search(word) ? "true" : "false") << std::endl;
+    }
 
     cout<<"\n--------\n";
 
-    auto* booleano = tree.get('a');
-    booleano = booleano->hash->search('b');
+    auto* booleano = trie.get('c');
 
+    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
     cout<<booleano->cadena<<endl;
+}
+
+int main() {
+
+    auto start = std::chrono::high_resolution_clock::now();
+
+    ejemplo1_100_words();
+
 
     auto end = std::chrono::high_resolution_clock::now();
 

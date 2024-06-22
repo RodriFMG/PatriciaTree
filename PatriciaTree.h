@@ -157,11 +157,10 @@ void PatriciaTree::remove(std::string word) {
             }
 
             if(!node->is_word && queue_word->empty()) entry_conditional = true;
-
             else if(node->hash->solo_un_hijo() && node->is_word){
                 if(queue_word->empty()){
-                    char unico_enlace = node->hash->encontrar_unico_hijo();
 
+                    char unico_enlace = node->hash->encontrar_unico_hijo();
                     auto* merge = node->hash->search(unico_enlace);
 
                     node->cadena += merge->cadena;
@@ -181,15 +180,19 @@ void PatriciaTree::remove(std::string word) {
                     }
 
                     node->children[node->hash->ind(unico_enlace)] = nullptr;
-
                 }
                 else{
+
                     auto* merge = node->hash->search(queue_word->first_element());
 
                     if(merge->cadena == queue_word->cadena_rango()) {
 
-                        if(merge->leaf) node->leaf = true;
-                        node->children[queue_word->first_element() - 'a'] = nullptr;
+                        if(merge->leaf) {
+                            node->leaf = true;
+                            node->children[queue_word->first_element() - 'a'] = nullptr;
+                        }
+                        else node->hash->search(queue_word->first_element())->is_word = false;
+
 
                     }
                     else continue;
@@ -200,7 +203,6 @@ void PatriciaTree::remove(std::string word) {
                 node->is_word = false;
                 entry_conditional = true;
             }
-
             else if(!node->hash->solo_un_hijo() && node->hash->search(queue_word->first_element())->leaf){
 
                 node->children[node->hash->ind(queue_word->first_element())] = nullptr;

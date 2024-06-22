@@ -18,7 +18,7 @@ public:
         root = new Node[26];
     };
 
-    void insert(string word);
+    void insert(const string& word);
     bool search(const string& word);
     void remove(string word);
 
@@ -26,50 +26,47 @@ public:
     Node* get(char pe){
         return root->hash->search(pe);
     }
-
-    Node* get_root(){
-        return root;
-    }
-
 };
 
 
-void PatriciaTree::insert(string word) {
+void PatriciaTree::insert(const string& word) {
     auto *node = root;
+    auto* queue_word = new Queue(word);
 
 
-    while (!word.empty()) {
+    while (!queue_word->empty()) {
         string str{};
 
-        if (node->hash->esta_o_no(word[0])) {
-            node = node->hash->search(word[0]);
+        if (node->hash->esta_o_no(queue_word->first_element())) {
+            node = node->hash->search(queue_word->first_element());
 
-            if (word == node->cadena) {
+            if (queue_word->cadena_rango() == node->cadena) {
                 node->is_word = true;
                 break;
             }
 
-            int i{};
-            while (!word.empty() && !node->cadena.empty()) {
-                if (word[i] == node->cadena[i]) {
-                    str += word[i];
-                    word.erase(0, 1);
+            auto* node_queue = new Queue(node->cadena);
 
-                    node->cadena.erase(0, 1);
-                    --i;
+            while (!queue_word->empty() && !node_queue->empty()) {
+                if (queue_word->first_element() == node_queue->first_element()) {
+
+                    str += queue_word->first_element();
+                    queue_word->pop();
+                    node_queue->pop();
+
                 } else break;
-                ++i;
+
             }
 
-            if (node->cadena.empty()) {
+            if (node_queue->empty()) {
                 node->cadena = str;
-                if (!word.empty() && node->leaf) node->leaf = false;
+                if (!queue_word->empty() && node->leaf) node->leaf = false;
 
                 continue;
             }
 
             auto* new_node = new Node[26];
-            new_node->cadena = node->cadena;
+            new_node->cadena = node_queue->cadena_rango();
             new_node->is_word = node->is_word;
             new_node->leaf = node->leaf;
 
@@ -84,7 +81,7 @@ void PatriciaTree::insert(string word) {
 
             node->hash->insert(new_node->cadena[0], new_node);
 
-            if (!word.empty()) node->is_word = false;
+            if (!queue_word->empty()) node->is_word = false;
             else node->is_word = true;
 
             node->leaf = false;
@@ -93,10 +90,10 @@ void PatriciaTree::insert(string word) {
         }
         else{
             auto* new_node = new Node[26];
-            new_node->cadena = word;
+            new_node->cadena = queue_word->cadena_rango();
             new_node->leaf = true;
             new_node->is_word = true;
-            node->hash->insert(word[0], new_node);
+            node->hash->insert(queue_word->first_element(), new_node);
             break;
         }
     }
@@ -137,8 +134,9 @@ bool PatriciaTree::search(const std::string& word) {
 // Ver el único caso que falla.
 void PatriciaTree::remove(std::string word) {
 
+    auto* queue_word = new Queue(word);
 
-    if(!search(word)) return;
+    if(!search(queue_word->cadena_rango())) return;
 
     auto* node = root;
 
@@ -146,8 +144,6 @@ void PatriciaTree::remove(std::string word) {
         root->children[word[0] - 'a'] = nullptr;
         return;
     }
-
-    auto* queue_word = new Queue(word);
 
     while(!queue_word->empty()){
         if(node->hash->esta_o_no(queue_word->first_element())){

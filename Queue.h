@@ -6,6 +6,8 @@
 #define PATRICIATREE_QUEUE_H
 
 #include <iostream>
+#include <cctype>
+
 
 struct NodeQueue{
     NodeQueue* next;
@@ -20,24 +22,20 @@ private:
 public:
 
     explicit Queue(const std::string& cad = "") : root(nullptr) {
-        CreateQueue(cad);
+        if (cad.empty()) return;
+
+
+        root = new NodeQueue(static_cast<char>(tolower(cad[0])));
+        NodeQueue* temp = root;
+
+        for (size_t i = 1; i < cad.size(); ++i) {
+            temp->next = new NodeQueue(static_cast<char>(tolower(cad[i])));
+            temp = temp->next;
+        }
     }
 
     virtual ~Queue(){
         while (!empty()) pop();
-    }
-
-    void CreateQueue(const std::string& cad){
-
-        if (cad.empty()) return;
-
-        root = new NodeQueue(cad[0]);
-        NodeQueue* temp = root;
-
-        for (size_t i = 1; i < cad.size(); ++i) {
-            temp->next = new NodeQueue(cad[i]);
-            temp = temp->next;
-        }
     }
 
     bool empty(){

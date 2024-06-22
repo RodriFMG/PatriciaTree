@@ -53,8 +53,7 @@ void PatriciaTree::insert(string word) {
             while (!word.empty() && !node->cadena.empty()) {
                 if (word[i] == node->cadena[i]) {
                     str += word[i];
-                    word.erase(0, 1); // Intentar cambiar el .erase(), por una función y otro porque esto
-                    // le aumenta un buen de complejidad.
+                    word.erase(0, 1);
 
                     node->cadena.erase(0, 1);
                     --i;
@@ -74,11 +73,12 @@ void PatriciaTree::insert(string word) {
             new_node->is_word = node->is_word;
             new_node->leaf = node->leaf;
 
-
-            for (int j = 0; j < 26; ++j) {
-                if (node->children[j]) {
-                    new_node->children[j] = node->children[j];
-                    node->children[j] = nullptr;
+            if(!node->leaf){
+                for (int j = 0; j < 26; ++j) {
+                    if (node->children[j]) {
+                        new_node->children[j] = node->children[j];
+                        node->children[j] = nullptr;
+                    }
                 }
             }
 
@@ -90,7 +90,8 @@ void PatriciaTree::insert(string word) {
             node->leaf = false;
             node->cadena = str;
 
-        } else {
+        }
+        else{
             auto* new_node = new Node[26];
             new_node->cadena = word;
             new_node->leaf = true;

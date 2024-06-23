@@ -23,7 +23,7 @@ void ejemplo1_100_words(){
     std::shuffle(unique_words.begin(), unique_words.end(), g);
 
     // Eliminar todas menos una
-    for(size_t i = 0; i < unique_words.size() - 20; ++i) {
+    for(size_t i = 0; i < unique_words.size() - 15; ++i) {
         trie.remove(unique_words[i]);
     }
 

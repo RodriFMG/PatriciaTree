@@ -33,11 +33,11 @@ public:
     void remove(string word);
 
 
-    Node* get(char pe){
+    [[maybe_unused]] Node* get(char pe){
         return root->hash->search(pe);
     }
 
-    Node* root_get(){
+    [[maybe_unused]] Node* root_get(){
         return root;
     }
 

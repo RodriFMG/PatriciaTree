@@ -5,7 +5,7 @@
 #ifndef PATRICIATREE_PATRICIATREE_H
 #define PATRICIATREE_PATRICIATREE_H
 
-#define WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN //Lo que permite dar el color.
 #include "Node.h"
 #include "Queue.h"
 #include <queue>
@@ -41,8 +41,8 @@ public:
         return root;
     }
 
-    void print();
-    void print_by_lvl(Node* node);
+    void print_by_lvl();
+    void print_by_lvl_recursive(Node* node);
 
 };
 
@@ -278,7 +278,7 @@ void PatriciaTree::remove(std::string word) {
 
 }
 
-void PatriciaTree::print() {
+void PatriciaTree::print_by_lvl() {
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
     cout<<"Palabra color";
@@ -294,13 +294,13 @@ void PatriciaTree::print() {
     SetConsoleTextAttribute(hConsole, Color_Default);
     cout<<": no_word"<<endl<<endl;
 
-    print_by_lvl(root);
+    print_by_lvl_recursive(root);
 
     cout<<endl;
 
 }
 
-void PatriciaTree::print_by_lvl(Node *node) {
+void PatriciaTree::print_by_lvl_recursive(Node *node) {
     if (!node) return;
 
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -321,7 +321,7 @@ void PatriciaTree::print_by_lvl(Node *node) {
     }
 
     for (int i = 0; i < 26; ++i) {
-        if (node->children[i]) print_by_lvl(node->children[i]);
+        if (node->children[i]) print_by_lvl_recursive(node->children[i]);
     }
 
     if (node != root && !node->leaf) std::cout << ")";

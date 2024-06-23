@@ -23,7 +23,7 @@ void ejemplo1_100_words(){
     std::shuffle(unique_words.begin(), unique_words.end(), g);
 
     // Eliminar todas menos una
-    for(size_t i = 0; i < unique_words.size() - 1; ++i) {
+    for(size_t i = 0; i < unique_words.size() - 20; ++i) {
         trie.remove(unique_words[i]);
     }
 
@@ -35,10 +35,7 @@ void ejemplo1_100_words(){
 
     cout<<"\n--------\n";
 
-    auto* booleano = trie.get('c');
-
-    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
-    cout<<booleano->cadena<<endl;
+    trie.print_by_lvl();
 
 }
 
@@ -173,10 +170,7 @@ void ejemplo2_100_words(){
 
     cout<<"\n--------\n";
 
-    auto* booleano = tree.get('s');
-
-    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
-    cout<<booleano->cadena<<endl;
+    tree.print_by_lvl();
 }
 
 void Print_Patricia_Tree(){
@@ -198,11 +192,13 @@ void Print_Patricia_Tree(){
         tree.insert(word);
     }
 
-    tree.print();
+    cout<<"\n--------\n";
+
+    tree.print_by_lvl();
 
 }
 
-void ejemplo1_random(){
+void ejemplo3_50_words(){
     PatriciaTree trie;
 
     // Insertar palabras
@@ -287,11 +283,11 @@ void ejemplo1_random(){
 
     cout<<"\n--------\n";
 
-    trie.print();
+    trie.print_by_lvl();
 
 }
 
-void ejemplo_4_100_random(){
+void ejemplo_4_100_words(){
     PatriciaTree trie;
     std::vector<std::string> words = {
             "apple", "apricot", "banana", "bandana", "cherry", "chocolate", "date", "dandelion", "elderberry", "elephant",
@@ -331,11 +327,7 @@ void ejemplo_4_100_random(){
 
     cout<<"\n--------\n";
 
-    auto* booleano = trie.root_get();
-    booleano = booleano->hash->search(booleano->hash->encontrar_unico_hijo());
-
-    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
-    cout<<booleano->cadena<<endl;
+    trie.print_by_lvl();
 
 }
 
@@ -344,7 +336,7 @@ int main() {
 
     auto start = std::chrono::high_resolution_clock::now();
 
-    ejemplo1_random();
+    ejemplo1_100_words();
 
 
     auto end = std::chrono::high_resolution_clock::now();

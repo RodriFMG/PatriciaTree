@@ -19,7 +19,6 @@ struct Node;
 class ArrayHash {
 private:
     Node* node;
-    int n_insert{};
 
 public:
     explicit ArrayHash(Node* node1);
@@ -77,7 +76,6 @@ Node* ArrayHash::search(char enlace) {
 void ArrayHash::insert(char enlace, Node* elm) {
     int ind = enlace - 'a';
     node->children[ind] = elm;
-    ++n_insert;
 }
 
 bool ArrayHash::esta_o_no(char enlace) {

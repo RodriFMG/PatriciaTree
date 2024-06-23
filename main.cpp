@@ -3,7 +3,6 @@
 #include "random"
 #include <unordered_set>
 
-
 void ejemplo1_100_words(){
     PatriciaTree trie;
 
@@ -180,25 +179,26 @@ void ejemplo2_100_words(){
     cout<<booleano->cadena<<endl;
 }
 
-void ejemplo3_4_word(){
+void Print_Patricia_Tree(){
+
+
+
     PatriciaTree tree;
 
-    tree.insert("a");
-    tree.insert("ab");
-    tree.insert("abc");
-    tree.insert("abd");
+    std::vector<std::string> words = {
+            "apple", "application", "applied", "apply", "apt", "ant", "antenna", "angel", "anger", "angle",
+            "banana", "band", "bandage", "bank", "bark", "barrel", "base", "basket", "bat", "batch"
+    };
 
-    tree.remove("abc");
+    std::random_device rd;
+    std::default_random_engine rng(rd());
+    std::shuffle(words.begin(), words.end(), rng);
 
-    auto* booleano = tree.get('a');
+    for (const auto& word : words) {
+        tree.insert(word);
+    }
 
-    booleano = booleano->hash->search('b');
-    cout<<boolalpha<<booleano->is_word<<endl;
-    cout<<booleano->cadena<<endl;
-
-    booleano = booleano->hash->search('d');
-    cout<<boolalpha<<booleano->is_word<<endl;
-    cout<<booleano->cadena<<endl;
+    tree.print();
 
 }
 
@@ -287,10 +287,8 @@ void ejemplo1_random(){
 
     cout<<"\n--------\n";
 
-    auto* booleano = trie.get('c');
+    trie.print();
 
-    cout<<boolalpha<<booleano->hash->solo_un_hijo()<<endl;
-    cout<<booleano->cadena<<endl;
 }
 
 void ejemplo_4_100_random(){
@@ -343,9 +341,10 @@ void ejemplo_4_100_random(){
 
 int main() {
 
+
     auto start = std::chrono::high_resolution_clock::now();
 
-    ejemplo_4_100_random();
+    ejemplo1_random();
 
 
     auto end = std::chrono::high_resolution_clock::now();

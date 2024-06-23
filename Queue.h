@@ -6,8 +6,7 @@
 #define PATRICIATREE_QUEUE_H
 
 #include <iostream>
-#include <cctype>
-
+#include <cctype> // por si falla el shuffle(), del main.
 
 struct NodeQueue{
     NodeQueue* next;
@@ -36,7 +35,9 @@ public:
 
     virtual ~Queue(){
         while (!empty()) pop();
+        delete root;
     }
+
 
     bool empty(){
         return root == nullptr;

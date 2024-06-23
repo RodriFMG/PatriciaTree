@@ -5,8 +5,18 @@
 #ifndef PATRICIATREE_PATRICIATREE_H
 #define PATRICIATREE_PATRICIATREE_H
 
+#define WIN32_LEAN_AND_MEAN
 #include "Node.h"
 #include "Queue.h"
+#include <queue>
+#include <Windows.h>
+#include <algorithm>
+
+enum ConsoleColors {
+    Color_Default = FOREGROUND_RED | FOREGROUND_GREEN | FOREGROUND_BLUE,
+    Color_Red = FOREGROUND_RED | FOREGROUND_INTENSITY,
+    Color_Green = FOREGROUND_GREEN | FOREGROUND_INTENSITY
+};
 
 class PatriciaTree{
 private:
@@ -30,6 +40,9 @@ public:
     Node* root_get(){
         return root;
     }
+
+    void print();
+    void print_by_lvl(Node* node);
 
 };
 
@@ -263,6 +276,55 @@ void PatriciaTree::remove(std::string word) {
     }
 
 
+}
+
+void PatriciaTree::print() {
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    cout<<"Palabra color";
+    SetConsoleTextAttribute(hConsole, Color_Green);
+    cout<<" verde";
+    SetConsoleTextAttribute(hConsole, Color_Default);
+    cout<<": is_word"<<endl;
+
+
+    cout<<"Palabra color";
+    SetConsoleTextAttribute(hConsole, Color_Red);
+    cout<<" rojo";
+    SetConsoleTextAttribute(hConsole, Color_Default);
+    cout<<": no_word"<<endl<<endl;
+
+    print_by_lvl(root);
+
+    cout<<endl;
+
+}
+
+void PatriciaTree::print_by_lvl(Node *node) {
+    if (!node) return;
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    if (node != root) {
+        if (node->is_word) {
+            SetConsoleTextAttribute(hConsole, Color_Green);
+            std::cout << node->cadena;
+        } else {
+            SetConsoleTextAttribute(hConsole, Color_Red);
+            std::cout << node->cadena;
+        }
+        SetConsoleTextAttribute(hConsole, Color_Default);
+
+        if(!node->leaf) cout<<"(";
+        else cout<<" ";
+
+    }
+
+    for (int i = 0; i < 26; ++i) {
+        if (node->children[i]) print_by_lvl(node->children[i]);
+    }
+
+    if (node != root && !node->leaf) std::cout << ")";
 }
 
 
